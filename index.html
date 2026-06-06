@@ -473,43 +473,36 @@
   .inc-card li strong { color: var(--fg); font-weight: 500; }
 
   /* Pricing */
-  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  @media (max-width: 860px) { .price-grid { grid-template-columns: 1fr; } }
-  .price-card {
+  .price-split {
+    display: grid; grid-template-columns: 1fr 1fr;
     border: 1px solid var(--line);
-    padding: 40px;
     background: var(--bg-2);
-    position: relative;
-    display: flex; flex-direction: column; gap: 20px;
-    min-height: 380px;
   }
-  .price-card.featured {
-    background: linear-gradient(180deg, oklch(0.22 0.025 145) 0%, var(--bg-2) 100%);
-    border-color: var(--accent-deep);
+  @media (max-width: 720px) { .price-split { grid-template-columns: 1fr; } }
+  .price-half {
+    padding: 36px 40px;
+    display: flex; flex-direction: column; gap: 18px;
   }
-  .price-card .tier {
-    display: flex; justify-content: space-between; align-items: baseline;
+  .price-half + .price-half { border-left: 1px solid var(--line-soft); }
+  @media (max-width: 720px) {
+    .price-half + .price-half { border-left: none; border-top: 1px solid var(--line-soft); }
+  }
+  .price-half .tier-name {
+    font-family: var(--display); font-size: 24px; letter-spacing: -0.015em; font-weight: 500;
     padding-bottom: 16px; border-bottom: 1px solid var(--line-soft);
   }
-  .price-card .tier-name { font-family: var(--display); font-size: 26px; letter-spacing: -0.015em; font-weight: 500; }
-  .price-card .tier-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-3); }
-  .price-card.featured .tier-tag { color: var(--accent); }
-  .price-card .prices { display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .price-card .primary-price {
+  .price-half .primary-price {
     font-family: var(--display);
-    font-size: 56px;
+    font-size: 52px;
     font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 1.0;
     font-feature-settings: "tnum";
   }
-  .price-card .primary-price .unit { font-size: 18px; color: var(--fg-3); margin-left: 8px; letter-spacing: 0; }
-  .price-card .alt-prices { display: flex; gap: 24px; font-family: var(--mono); font-size: 12px; color: var(--fg-2); }
-  .price-card .alt-prices span { display: flex; flex-direction: column; gap: 2px; }
-  .price-card .alt-prices .alt-k { font-size: 10px; letter-spacing: 0.16em; color: var(--fg-3); text-transform: uppercase; }
-  .price-card .feats { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; font-size: 14px; color: var(--fg-2); }
-  .price-card .feats .feat-row { display: flex; gap: 10px; align-items: center; }
-  .price-card .feats .feat-row::before { content: "—"; color: var(--accent); font-family: var(--mono); }
+  .price-half .primary-price .unit { font-size: 18px; color: var(--fg-3); margin-left: 8px; letter-spacing: 0; }
+  .price-half .alt-prices { display: flex; gap: 24px; font-family: var(--mono); font-size: 12px; color: var(--fg-2); }
+  .price-half .alt-prices span { display: flex; flex-direction: column; gap: 2px; }
+  .price-half .alt-prices .alt-k { font-size: 10px; letter-spacing: 0.16em; color: var(--fg-3); text-transform: uppercase; }
 
   .price-notes {
     margin-top: 32px; padding: 24px; border: 1px dashed var(--line);
@@ -593,7 +586,7 @@
 
   /* Hotels */
   .hotel-grid {
-    display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
   }
   @media (max-width: 980px) { .hotel-grid { grid-template-columns: 1fr; } }
   .hotel-card {
@@ -920,7 +913,7 @@
       </h1>
       <p class="sub">Hook Suspension Zipline Event Outside of Xalapa, Mexico.</p>
       <p class="intro">
-        An immersive multi-day suspension retreat in the mountains outside Xalapa, Mexico
+        An immersive three-day suspension retreat in the mountains outside Xalapa, Mexico
         featuring zipline suspensions, jungle suspensions, community meals, cabin lodging,
         and a traditional Temazcal ceremony.
       </p>
@@ -955,13 +948,13 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">01 / About</span>
-      <h2>A four-day suspension retreat in the cloud forest above Teocelo, Veracruz.</h2>
+      <h2>A three-day suspension retreat in the cloud forest above Teocelo, Veracruz.</h2>
     </div>
 
     <div class="about-grid reveal">
       <p class="lede">
-        Xalapa Zipline Suspensions gathers a small group of experienced practitioners
-        for several days of <span class="accent">rigging, ceremony, and rest</span>&nbsp;in the mountains of central Veracruz.
+        Xalapa Zipline Suspensions gathers a small group of practitioners and participants
+        of <span class="accent">all experience levels</span>&nbsp;for several days of suspensions and rest in the mountains of central Veracruz.
       </p>
       <div class="about-features">
         <div class="feat">
@@ -1001,20 +994,13 @@
         </div>
         <div class="feat">
           <span class="n">08</span>
-          <span class="t">Experienced practice</span>
-          <span class="d">For people with prior hook suspension experience.</span>
+          <span class="t">All experience levels</span>
+          <span class="d">Open to seasoned practitioners and first-timers alike, with guidance throughout.</span>
         </div>
       </div>
     </div>
 
     <div class="callout reveal">
-      <span class="icon">Prerequisite</span>
-      <p>
-        This event is designed for people with <strong>some prior hook suspension experience</strong>.
-        If you are new to suspension, please reach out to the hosts before registering.
-      </p>
-    </div>
-    <div class="callout reveal" style="margin-top: 16px">
       <span class="icon">Note · Location</span>
       <p>
         Although the event is called <strong>Xalapa Zipline Suspensions</strong>, the actual retreat
@@ -1107,18 +1093,22 @@
           </li>
           <li>
             <span class="check">✓</span>
-            <span><strong>Event t-shirt.</strong> Limited edition shirt commemorating the 2026 retreat.</span>
-          </li>
-          <li>
-            <span class="check">✓</span>
-            <span><strong>All retreat activities.</strong> Including the Temazcal ceremony and open jungle activities.</span>
+            <span><strong>Core retreat activities.</strong> Zipline suspensions, jungle suspensions, and open daytime activities.</span>
           </li>
         </ul>
       </div>
 
       <div class="inc-card deny">
-        <h3>Not Included <span class="badge">Bring your own</span></h3>
+        <h3>Not Included <span class="badge">Extra / not in registration</span></h3>
         <ul>
+          <li>
+            <span class="check">—</span>
+            <span><strong>Event t-shirt.</strong> Available at an additional cost — price to be announced.</span>
+          </li>
+          <li>
+            <span class="check">—</span>
+            <span><strong>Temazcal ceremony.</strong> Available at an additional cost — price to be announced.</span>
+          </li>
           <li>
             <span class="check">—</span>
             <span><strong>Transportation to or from Xalapa.</strong> Your travel into and out of the city is your responsibility.</span>
@@ -1150,56 +1140,32 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">04 / Pricing</span>
-      <h2>Two tiers. Invoiced after registration is approved.</h2>
+      <h2>Two registration types. Invoiced after registration is approved.</h2>
     </div>
 
-    <div class="price-grid reveal">
-      <div class="price-card featured">
-        <div class="tier">
-          <span class="tier-name">Participant</span>
-          <span class="tier-tag">Tier · A</span>
+    <div class="price-split reveal">
+      <div class="price-half">
+        <span class="tier-name">Participant</span>
+        <div class="primary-price">375<span class="unit">EUR</span></div>
+        <div class="alt-prices">
+          <span><span class="alt-k">USD</span>440</span>
+          <span><span class="alt-k">MXN</span>7,600</span>
         </div>
-        <div class="prices">
-          <div class="primary-price">375<span class="unit">EUR</span></div>
-          <div class="alt-prices">
-            <span><span class="alt-k">USD</span>440</span>
-            <span><span class="alt-k">MXN</span>7,600</span>
-          </div>
-          <div class="feats">
-            <span class="feat-row">Full retreat access</span>
-            <span class="feat-row">One guaranteed suspension</span>
-            <span class="feat-row">Lodging, meals, shuttle, shirt</span>
-            <span class="feat-row">Temazcal ceremony included</span>
-          </div>
-        </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2VFKokL-bGFvwrIYyVXvH18CvGIMEDwYru6f738lPTS2pwQ/viewform" target="_blank" rel="noreferrer" class="btn primary" style="align-self: flex-start">
-          Register as participant <span class="arrow">↗</span>
-        </a>
       </div>
-
-      <div class="price-card">
-        <div class="tier">
-          <span class="tier-name">Practitioner</span>
-          <span class="tier-tag">Tier · B</span>
+      <div class="price-half">
+        <span class="tier-name">Practitioner</span>
+        <div class="primary-price">325<span class="unit">EUR</span></div>
+        <div class="alt-prices">
+          <span><span class="alt-k">USD</span>380</span>
+          <span><span class="alt-k">MXN</span>6,600</span>
         </div>
-        <div class="prices">
-          <div class="primary-price">325<span class="unit">EUR</span></div>
-          <div class="alt-prices">
-            <span><span class="alt-k">USD</span>380</span>
-            <span><span class="alt-k">MXN</span>6,600</span>
-          </div>
-          <div class="feats">
-            <span class="feat-row">Full retreat access</span>
-            <span class="feat-row">Rigging &amp; practitioner participation</span>
-            <span class="feat-row">Lodging, meals, shuttle, shirt</span>
-            <span class="feat-row">Temazcal ceremony included</span>
-          </div>
-        </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2VFKokL-bGFvwrIYyVXvH18CvGIMEDwYru6f738lPTS2pwQ/viewform" target="_blank" rel="noreferrer" class="btn" style="align-self: flex-start">
-          Register as practitioner <span class="arrow">↗</span>
-        </a>
       </div>
     </div>
+
+    <p class="reveal" style="margin-top: 24px; color: var(--fg-2); font-size: 15px">
+      Not sure whether to register as a participant or practitioner?
+      See <a href="#faq" style="color: var(--accent)">the FAQ</a>.
+    </p>
 
     <div class="price-notes reveal">
       <div class="note-stack">
@@ -1222,7 +1188,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">05 / Itinerary</span>
-      <h2>Four days. Two suspension days. One ceremony.</h2>
+      <h2>Three days plus departure. Two full suspension days</h2>
     </div>
 
     <div class="timeline reveal">
@@ -1409,10 +1375,6 @@
 
     <div class="hotel-grid reveal">
       <div class="hotel-card featured">
-        <div class="ph img">
-          <span class="ph-label">Hotel exterior / lobby</span>
-          <span class="ph-id">hotel.holiday-inn</span>
-        </div>
         <div class="body">
           <span class="tag">Recommended</span>
           <span class="name">Holiday Inn Express Xalapa</span>
@@ -1429,22 +1391,6 @@
       </div>
 
       <div class="hotel-card placeholder">
-        <div class="ph img">
-          <span class="ph-label">Hotel placeholder</span>
-          <span class="ph-id">hotel.tba.01</span>
-        </div>
-        <div class="body">
-          <span class="tag">Additional option · TBA</span>
-          <span class="name">Hotel name pending</span>
-          <span class="addr">More recommendations will be added closer to the event.</span>
-        </div>
-      </div>
-
-      <div class="hotel-card placeholder">
-        <div class="ph img">
-          <span class="ph-label">Hotel placeholder</span>
-          <span class="ph-id">hotel.tba.02</span>
-        </div>
         <div class="body">
           <span class="tag">Additional option · TBA</span>
           <span class="name">Hotel name pending</span>
@@ -1656,7 +1602,7 @@
         </button>
         <div class="faq-a">
           <div>
-            <div class="inner">Yes. This event is intended for people with some prior hook suspension experience.</div>
+            <div class="inner">No. All experience levels are welcome — from seasoned practitioners to first-timers. If you are new to suspension, the hosts will guide you throughout.</div>
           </div>
         </div>
       </div>
@@ -1741,6 +1687,18 @@
         <div class="faq-a">
           <div>
             <div class="inner">No refunds are available after October 1, 2026.</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" type="button">
+          <span class="idx">09</span>
+          <span class="question">Do I register as a participant or practitioner?</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <div>
+            <div class="inner">Register as a <strong>participant</strong> if you are attending primarily to be suspended and take part in the retreat. Register as a <strong>practitioner</strong> if you have recent suspension facilitation experience (past year) and intend to help facilitate. If you are unsure, register as a participant and mention your experience — the hosts will follow up.</div>
           </div>
         </div>
       </div>
