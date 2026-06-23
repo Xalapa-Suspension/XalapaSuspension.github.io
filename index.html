@@ -668,6 +668,13 @@
   @media (max-width: 860px) { .bio-grid { grid-template-columns: 1fr; } }
   .bio-card { display: flex; flex-direction: column; gap: 24px; }
   .bio-card .portrait { aspect-ratio: 1/1; }
+  .bio-card .portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border: 1px solid var(--line-soft);
+  }
   .bio-card .info { display: flex; flex-direction: column; gap: 14px; }
   .bio-card .role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
   .bio-card .name { font-family: var(--display); font-size: 32px; letter-spacing: -0.02em; font-weight: 500; }
@@ -1538,23 +1545,25 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">10 / Organizers</span>
-      <h2>Hosted by Indigenak Suspension Team and Chango Piercer.</h2>
+      <h2>Hosted by Alex (Indigenak) and Chango.</h2>
     </div>
 
     <div class="bio-grid reveal">
       <div class="bio-card">
-        <div class="ph portrait">
-          <span class="ph-label">Team portrait</span>
-          <span class="ph-id">bio.indigenak</span>
+        <div class="portrait">
+          <img src="images/alex.jpg" alt="Alex Indigenak" />
         </div>
         <div class="info">
-          <span class="role">Hosting collective</span>
-          <span class="name">Indigenak Suspension Team</span>
+          <span class="role">Host</span>
+          <span class="name">Alex (Indigenak)</span>
           <p class="bio-text">
-            <span class="placeholder-tag">Lorem ipsum</span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed
-            facilisis nibh, vel ornare libero. Praesent aliquam, urna et porttitor
-            rhoncus, libero ipsum convallis nulla. Bio copy to be replaced before launch.
+            Born in Mondariz, Spain, Alex became a body piercer in 1998. In 2004, he
+            traveled to Mexico, where he was introduced to body suspension and body
+            modification. In 2010, he founded the Indigenak suspension crew, which remains
+            active today and has facilitated suspensions in more than 20 countries. He also
+            co-organizes the Hang You suspension retreat in Spain and is currently based in
+            Berlin at Der Grimm Tattoo, where he performs piercings, suspensions, and body
+            modification work.
           </p>
           <a class="ig-link" href="https://www.instagram.com/_indigenak_suspension_team_/" target="_blank" rel="noreferrer">
             @_indigenak_suspension_team_ ↗
@@ -1563,18 +1572,22 @@
       </div>
 
       <div class="bio-card">
-        <div class="ph portrait">
-          <span class="ph-label">Practitioner portrait</span>
-          <span class="ph-id">bio.chango</span>
+        <div class="portrait">
+          <img src="images/chango.jpg" alt="Jose Roberto Ruiz, known as Chango" />
         </div>
         <div class="info">
-          <span class="role">Practitioner &amp; host</span>
-          <span class="name">Chango Piercer</span>
+          <span class="role">Host</span>
+          <span class="name">Jose Roberto Ruiz (Chango)</span>
           <p class="bio-text">
-            <span class="placeholder-tag">Lorem ipsum</span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in
-            volutpat orci. Mauris sed convallis quam. Bio copy to be replaced before
-            launch.
+            Born in Xalapa, Veracruz, Mexico, Jose Roberto Ruiz, known as Chango, has
+            worked as a piercer and body modifier for 25 years. He currently works at
+            Abracadabra Tattoos &amp; Piercings and has been facilitating suspensions for
+            19 years. During that time, he has participated in and organized events such
+            as Campamento de Suspensiones Mexico and Dia de Muertos en el Mexico
+            Prehispanico, and he is currently part of the organizing team behind Xalapa
+            Zipline Suspension. He approaches suspension as an offering and ritual, and
+            continues to learn with the goal of creating safe, purposeful suspension
+            experiences.
           </p>
           <a class="ig-link" href="https://www.instagram.com/chango_piercer/" target="_blank" rel="noreferrer">
             @chango_piercer ↗
