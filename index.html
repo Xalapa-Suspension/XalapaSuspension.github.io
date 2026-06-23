@@ -325,9 +325,8 @@
 
   /* About */
   .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 0;
   }
-  @media (max-width: 980px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
   .lede {
     font-family: var(--display);
     font-size: clamp(24px, 3vw, 36px);
@@ -413,8 +412,12 @@
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
     background: color-mix(in oklab, var(--bg) 80%, transparent);
     padding: 4px 8px; border: 1px solid var(--line);
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.35;
+    max-width: 140px;
   }
+  .map .pin .name span { display: block; }
   .map .label-static {
     position: absolute;
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -544,6 +547,11 @@
   .price-notes .nk { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-3); }
   .price-notes .nv { color: var(--fg-2); font-size: 14px; }
   .price-notes .nv strong { color: var(--warn); font-weight: 500; }
+  .price-notes .btn {
+    justify-self: center;
+    justify-content: center;
+    min-width: 176px;
+  }
 
   /* Timeline */
   .timeline { position: relative; padding-left: 28px; }
@@ -638,12 +646,75 @@
   .hotel-card .addr { color: var(--fg-2); font-size: 13px; line-height: 1.55; }
   .hotel-card .feats { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
   .hotel-card .feats span { display: flex; gap: 8px; }
-  .hotel-card .feats span::before { content: "—"; color: var(--accent); }
+  .hotel-card .feats span::before { content: "-"; color: var(--accent); }
+  .hotel-card .hotel-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; padding-top: 10px; }
 
   /* Lodging */
   .lodging-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
   @media (max-width: 980px) { .lodging-grid { grid-template-columns: 1fr; } }
   .lodging-img { aspect-ratio: 4/3; }
+  .lodging-slideshow {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line-soft);
+    background: var(--bg-2);
+  }
+  .lodging-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity .45s ease;
+  }
+  .lodging-slide.active { opacity: 1; }
+  .lodging-controls {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .lodging-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid color-mix(in oklab, var(--line) 82%, transparent);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    color: var(--fg);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+  .lodging-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid color-mix(in oklab, var(--line) 82%, transparent);
+    background: color-mix(in oklab, var(--bg) 84%, transparent);
+    backdrop-filter: blur(10px);
+  }
+  .lodging-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border-radius: 999px;
+    border: none;
+    background: color-mix(in oklab, var(--fg-3) 80%, transparent);
+    cursor: pointer;
+  }
+  .lodging-dot.active { background: var(--accent); }
   .lodging-list { display: flex; flex-direction: column; gap: 0; }
   .lodging-list .row {
     display: grid; grid-template-columns: 36px 1fr;
@@ -870,6 +941,13 @@
     transition: opacity .25s;
   }
   .scrim.open { opacity: 1; pointer-events: auto; }
+  @media (max-width: 720px) {
+    .map .pin .name {
+      max-width: 110px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+    }
+  }
 </style>
 <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
@@ -946,7 +1024,7 @@
       </div>
       <div class="item">
         <span class="k">Dates</span>
-        <span class="v">Nov 09 — 12 / 2026</span>
+        <span class="v">Nov 09 - 12 / 2026</span>
       </div>
       <div class="item">
         <span class="k">Coordinates</span>
@@ -982,7 +1060,7 @@
         <span class="k">Hosted by</span>
         <div class="hosts">
           <a class="host" href="https://www.instagram.com/_indigenak_suspension_team_/" target="_blank" rel="noreferrer">
-            <span>Indigenak Suspension Team</span>
+            <span>Alex Indigenak</span>
             <span class="ig">@_indigenak_suspension_team_</span>
           </a>
           <a class="host" href="https://www.instagram.com/chango_piercer/" target="_blank" rel="noreferrer">
@@ -1008,55 +1086,13 @@
         Xalapa Zipline Suspensions gathers a small group of practitioners and participants
         of <span class="accent">all experience levels</span>&nbsp;for several days of suspensions and rest in the mountains of central Veracruz.
       </p>
-      <div class="about-features">
-        <div class="feat">
-          <span class="n">01</span>
-          <span class="t">Jungle retreat atmosphere</span>
-          <span class="d">A forested mountainous site surrounded by Veracruz cloud forest.</span>
-        </div>
-        <div class="feat">
-          <span class="n">02</span>
-          <span class="t">Community-oriented</span>
-          <span class="d">Shared meals, shared rooms, shared rigging — built around presence.</span>
-        </div>
-        <div class="feat">
-          <span class="n">03</span>
-          <span class="t">Zipline suspensions</span>
-          <span class="d">Hook suspensions performed along a rigged zipline through the canopy.</span>
-        </div>
-        <div class="feat">
-          <span class="n">04</span>
-          <span class="t">Nature immersion</span>
-          <span class="d">Open daylight rigging, evening fire, full retreat from city noise.</span>
-        </div>
-        <div class="feat">
-          <span class="n">05</span>
-          <span class="t">Shared meals &amp; lodging</span>
-          <span class="d">Three meals daily, cabin-style sleeping arrangements onsite.</span>
-        </div>
-        <div class="feat">
-          <span class="n">06</span>
-          <span class="t">Temazcal ceremony</span>
-          <span class="d">Traditional pre-Hispanic sweat lodge ceremony held in the evening of Nov 10.</span>
-        </div>
-        <div class="feat">
-          <span class="n">07</span>
-          <span class="t">Intentional practice</span>
-          <span class="d">A respectful, careful, ceremonial approach to suspension.</span>
-        </div>
-        <div class="feat">
-          <span class="n">08</span>
-          <span class="t">All experience levels</span>
-          <span class="d">Open to seasoned practitioners and first-timers alike, with guidance throughout.</span>
-        </div>
-      </div>
     </div>
 
     <div class="callout reveal">
       <span class="icon">Note · Location</span>
       <p>
         Although the event is called <strong>Xalapa Zipline Suspensions</strong>, the actual retreat
-        location is in the nearby village of <strong>Teocelo, Veracruz</strong> — about 45 minutes from Xalapa.
+        location is in the nearby village of <strong>Teocelo, Veracruz</strong> - about 45 minutes from Xalapa.
       </p>
     </div>
   </div>
@@ -1067,7 +1103,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">02 / Location</span>
-      <h2>Finca Santa Rosa — a forested camp on the edge of Teocelo.</h2>
+      <h2>Finca Santa Rosa - a forested camp on the edge of Teocelo.</h2>
     </div>
 
     <div class="loc-grid reveal">
@@ -1091,7 +1127,7 @@
         <div class="pin" style="left: 80%; top: 76%">
           <span class="pulse"></span>
           <span class="dot"></span>
-          <span class="name">Finca Santa Rosa · Teocelo</span>
+          <span class="name"><span>Finca Santa Rosa</span><span>Teocelo</span></span>
         </div>
         <span class="label-static" style="right: 8%; bottom: 8%">~45 MIN BY SHUTTLE</span>
       </div>
@@ -1120,7 +1156,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">03 / Included</span>
-      <h2>What your registration covers — and what it doesn't.</h2>
+      <h2>What your registration covers - and what it doesn't.</h2>
     </div>
 
     <div class="inc-grid reveal">
@@ -1158,27 +1194,27 @@
         <h3>Not Included <span class="badge">Extra / not in registration</span></h3>
         <ul>
           <li>
-            <span class="check">—</span>
-            <span><strong>Temazcal ceremony.</strong> Available at an additional cost — price to be announced.</span>
+            <span class="check">-</span>
+            <span><strong>Temazcal ceremony.</strong> Available at an additional cost - price to be announced.</span>
           </li>
           <li>
-            <span class="check">—</span>
-            <span><strong>Transportation to or from Xalapa.</strong> Your travel into and out of the city is your responsibility.</span>
+            <span class="check">-</span>
+            <span><strong>Transportation between Xalapa and your arrival airport.</strong> Travel between Xalapa and the airport you arrive at is your responsibility.</span>
           </li>
           <li>
-            <span class="check">—</span>
+            <span class="check">-</span>
             <span><strong>Flights.</strong> International or domestic air travel is not covered.</span>
           </li>
           <li>
-            <span class="check">—</span>
-            <span><strong>Lodging in Xalapa.</strong> Before or after the retreat — see hotel recommendations below.</span>
+            <span class="check">-</span>
+            <span><strong>Lodging in Xalapa.</strong> Before or after the retreat - see hotel recommendations below.</span>
           </li>
           <li>
-            <span class="check">—</span>
+            <span class="check">-</span>
             <span><strong>Personal travel expenses.</strong> Meals, transit, and incidentals outside the retreat dates.</span>
           </li>
           <li>
-            <span class="check">—</span>
+            <span class="check">-</span>
             <span><strong>Personal purchases.</strong> Anything bought outside the included program.</span>
           </li>
         </ul>
@@ -1254,7 +1290,7 @@
             <span class="time">08:00</span>
             <div>
               <div class="desc">Meet at Abracadabra Tattoos &amp; Piercings, Xalapa.</div>
-              <div class="meta">Group meet-up point — coffee &amp; introductions.</div>
+              <div class="meta">Group meet-up point - coffee &amp; introductions.</div>
             </div>
           </div>
           <div class="event-row">
@@ -1439,14 +1475,32 @@
             <span>Walking distance to Abracadabra</span>
             <span>Convenient for shuttle pickup</span>
           </div>
+          <div class="hotel-actions">
+            <a href="https://www.ihg.com/holidayinnexpress/hotels/us/es/xalapa/jalex/hoteldetail" target="_blank" rel="noreferrer" class="btn sm">
+              Visit hotel <span class="arrow">↗</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="hotel-card placeholder">
+      <div class="hotel-card">
         <div class="body">
-          <span class="tag">Additional option · TBA</span>
-          <span class="name">Hotel name pending</span>
-          <span class="addr">More recommendations will be added closer to the event.</span>
+          <span class="tag">Additional option</span>
+          <span class="name">Hotel Maria Victoria Xalapa</span>
+          <span class="addr">
+            Ignacio Zaragoza 6, Zona Centro,<br />
+            Centro, 91000 Xalapa-Enríquez, Ver., Mexico
+          </span>
+          <div class="feats">
+            <span>Another central option on Ignacio Zaragoza</span>
+            <span>Easy walk to downtown cafes and Parque Juárez</span>
+            <span>Simple taxi ride to the shuttle meeting point</span>
+          </div>
+          <div class="hotel-actions">
+            <a href="https://www.mariavictoriahotel.com/" target="_blank" rel="noreferrer" class="btn sm">
+              Visit hotel <span class="arrow">↗</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1462,9 +1516,17 @@
     </div>
 
     <div class="lodging-grid reveal">
-      <div class="ph lodging-img">
-        <span class="ph-label">Cabin interior / shared bunkroom</span>
-        <span class="ph-id">lodging.cabin.01</span>
+      <div class="lodging-slideshow lodging-img">
+        <img class="lodging-slide active" src="images/cabin.png" alt="Shared cabin room with three beds" />
+        <img class="lodging-slide" src="images/retreat-exterior.png" alt="Exterior of the retreat cabins and grounds" />
+        <div class="lodging-controls">
+          <button class="lodging-nav" type="button" data-slide-dir="-1" aria-label="Show previous lodging photo">Prev</button>
+          <div class="lodging-dots" aria-label="Lodging photo selector">
+            <button class="lodging-dot active" type="button" data-slide-to="0" aria-label="Show first lodging photo" aria-current="true"></button>
+            <button class="lodging-dot" type="button" data-slide-to="1" aria-label="Show second lodging photo" aria-current="false"></button>
+          </div>
+          <button class="lodging-nav" type="button" data-slide-dir="1" aria-label="Show next lodging photo">Next</button>
+        </div>
       </div>
       <div class="lodging-list">
         <div class="row">
@@ -1478,7 +1540,7 @@
           <span class="n">B</span>
           <div>
             <div class="t">Possible private rooms</div>
-            <div class="d">Some private room accommodations may be available — limited supply.</div>
+            <div class="d">Some private room accommodations may be available - limited supply.</div>
           </div>
         </div>
         <div class="row">
@@ -1519,7 +1581,7 @@
       <div class="callout" style="margin-top: 0">
         <span class="icon">Weather · Nov</span>
         <p>
-          November weather in Veracruz can include rain and humidity. Prepare for changing outdoor conditions —
+          November weather in Veracruz can include rain and humidity. Prepare for changing outdoor conditions -
           warm days, cool nights, and the occasional downpour.
         </p>
       </div>
@@ -1590,7 +1652,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow label">10 / Organizers</span>
-      <h2>Hosted by Alex (Indigenak) and Chango.</h2>
+      <h2>Hosted by Alex Indigenak and Chango Piercer.</h2>
     </div>
 
     <div class="bio-grid reveal">
@@ -1600,7 +1662,7 @@
         </div>
         <div class="info">
           <span class="role">Host</span>
-          <span class="name">Alex (Indigenak)</span>
+          <span class="name">Alex Indigenak</span>
           <p class="bio-text">
             Born in Mondariz, Spain, Alex became a body piercer in 1998. In 2004, he
             traveled to Mexico, where he was introduced to body suspension and body
@@ -1622,7 +1684,7 @@
         </div>
         <div class="info">
           <span class="role">Host</span>
-          <span class="name">Jose Roberto Ruiz (Chango)</span>
+          <span class="name">Chango Piercer</span>
           <p class="bio-text">
             Born in Xalapa, Veracruz, Mexico, Jose Roberto Ruiz, known as Chango, has
             worked as a piercer and body modifier for 25 years. He currently works at
@@ -1660,7 +1722,7 @@
         </button>
         <div class="faq-a">
           <div>
-            <div class="inner">No. All experience levels are welcome — from seasoned practitioners to first-timers. If you are new to suspension, the hosts will guide you throughout.</div>
+            <div class="inner">No. All experience levels are welcome - from seasoned practitioners to first-timers. If you are new to suspension, the hosts will guide you throughout.</div>
           </div>
         </div>
       </div>
@@ -1756,7 +1818,19 @@
         </button>
         <div class="faq-a">
           <div>
-            <div class="inner">Register as a <strong>participant</strong> if you are attending primarily to be suspended and take part in the retreat. Register as a <strong>practitioner</strong> if you have recent suspension facilitation experience (past year) and intend to help facilitate. If you are unsure, register as a participant and mention your experience — the hosts will follow up.</div>
+            <div class="inner">Register as a <strong>participant</strong> if you are attending primarily to be suspended and take part in the retreat. Register as a <strong>practitioner</strong> if you have recent suspension facilitation experience (past year) and intend to help facilitate. If you are unsure, register as a participant and mention your experience - the hosts will follow up.</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" type="button">
+          <span class="idx">10</span>
+          <span class="question">How do I book the ADO bus to Xalapa?</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <div>
+            <div class="inner">Use the official ADO booking flow and search the route as <strong>México TAPO</strong> to <strong>Xalapa CAXA</strong>. TAPO is the Mexico City terminal, and CAXA is the main ADO terminal in Xalapa. If you see a result that only says <strong>Xalapa</strong> or mixes the names, choose the listing that explicitly ends in <strong>Xalapa CAXA</strong>. In the app, enter origin and destination, pick your date, tap Search, choose your trip and seat, and continue to payment. Open <a class="ado-primary-link" data-ios-href="https://apps.apple.com/mx/app/ado-boletos-de-autob%C3%BAs/id1480058029" data-android-href="https://play.google.com/store/apps/details?id=com.mobilityado.ado&amp;hl=en" data-web-href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" data-ios-label="ADO app for iPhone" data-android-label="ADO app on Google Play" data-web-label="official ADO booking page" href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer">official ADO booking page</a>, or use the <a href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer">México TAPO - Xalapa CAXA route page</a> directly.</div>
           </div>
         </div>
       </div>
@@ -1775,7 +1849,7 @@
       <div class="col">
         <span class="k">Event</span>
         <span class="v">Xalapa Zipline Suspensions 2026</span>
-        <span style="color: var(--fg-2); font-size: 14px">Nov 09 — 12, 2026 · Teocelo, Veracruz, MX</span>
+        <span style="color: var(--fg-2); font-size: 14px">Nov 09 - 12, 2026 · Teocelo, Veracruz, MX</span>
         <span class="soon" style="margin-top: 10px">More information coming soon</span>
       </div>
       <div class="col">
@@ -1800,7 +1874,7 @@
       </div>
       <div class="col">
         <span class="k">Contact</span>
-        <span style="color: var(--fg-2); font-size: 14px">contact@ — placeholder</span>
+        <span style="color: var(--fg-2); font-size: 14px">contact@ - placeholder</span>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2VFKokL-bGFvwrIYyVXvH18CvGIMEDwYru6f738lPTS2pwQ/viewform" target="_blank" rel="noreferrer" class="btn primary sm" style="margin-top: 12px; align-self: flex-start">
           Register <span class="arrow">↗</span>
         </a>
@@ -1879,6 +1953,53 @@
       });
     });
     render();
+  })();
+
+  (function () {
+    var slideshows = document.querySelectorAll(".lodging-slideshow");
+    slideshows.forEach(function (slideshow) {
+      var slides = Array.prototype.slice.call(slideshow.querySelectorAll(".lodging-slide"));
+      var dots = Array.prototype.slice.call(slideshow.querySelectorAll(".lodging-dot"));
+      if (slides.length < 2) return;
+      var index = 0;
+      function show(next) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("active", i === index);
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("active", i === index);
+          dot.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+      }
+      Array.prototype.slice.call(slideshow.querySelectorAll("[data-slide-dir]")).forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          show(index + Number(btn.getAttribute("data-slide-dir")));
+        });
+      });
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          show(Number(dot.getAttribute("data-slide-to")));
+        });
+      });
+      show(index);
+    });
+  })();
+
+  (function () {
+    var links = document.querySelectorAll(".ado-primary-link");
+    if (!links.length) return;
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPad|iPhone|iPod/i.test(ua);
+    var isAndroid = /Android/i.test(ua);
+    var hrefAttr = isIOS ? "data-ios-href" : isAndroid ? "data-android-href" : "data-web-href";
+    var labelAttr = isIOS ? "data-ios-label" : isAndroid ? "data-android-label" : "data-web-label";
+    links.forEach(function (link) {
+      var href = link.getAttribute(hrefAttr);
+      var label = link.getAttribute(labelAttr);
+      if (href) link.setAttribute("href", href);
+      if (label) link.textContent = label;
+    });
   })();
 
   // Reveal sections as they scroll into view
