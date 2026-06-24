@@ -388,27 +388,35 @@
   .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .map .pin {
     position: absolute;
-    transform: translate(-50%, -100%);
-    display: flex; flex-direction: column; align-items: center;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
   }
   .map .pin .dot {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 14px; height: 14px; border-radius: 50%;
     background: var(--accent);
+    transform: translate(-50%, -50%);
     box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 30%, transparent), 0 0 24px var(--accent);
   }
   .map .pin .pulse {
-    position: absolute; top: 0; left: 50%;
+    position: absolute; top: 0; left: 0;
     width: 14px; height: 14px; border-radius: 50%;
     background: var(--accent);
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     animation: pulse 2.4s ease-out infinite;
   }
   @keyframes pulse {
-    0% { transform: translate(-50%, 0) scale(1); opacity: 0.7; }
-    100% { transform: translate(-50%, 0) scale(4.5); opacity: 0; }
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(4.5); opacity: 0; }
   }
   .map .pin .name {
-    margin-top: 10px;
+    position: absolute;
+    top: 18px;
+    left: 0;
+    transform: translateX(-50%);
     font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
     background: color-mix(in oklab, var(--bg) 80%, transparent);
     padding: 4px 8px; border: 1px solid var(--line);
@@ -537,6 +545,14 @@
   .price-half .alt-prices { display: flex; gap: 24px; font-family: var(--mono); font-size: 12px; color: var(--fg-2); }
   .price-half .alt-prices span { display: flex; flex-direction: column; gap: 2px; }
   .price-half .alt-prices .alt-k { font-size: 10px; letter-spacing: 0.16em; color: var(--fg-3); text-transform: uppercase; }
+  .inline-link {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .inline-link:hover { color: var(--accent-deep); }
 
   .price-notes {
     margin-top: 32px; padding: 24px; border: 1px dashed var(--line);
@@ -648,6 +664,25 @@
   .hotel-card .feats span { display: flex; gap: 8px; }
   .hotel-card .feats span::before { content: "-"; color: var(--accent); }
   .hotel-card .hotel-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; padding-top: 10px; }
+  @media (max-width: 720px) {
+    .price-half {
+      align-items: center;
+      text-align: center;
+    }
+    .price-half .alt-prices { justify-content: center; }
+    .price-notes {
+      text-align: center;
+      justify-items: center;
+    }
+    .price-notes .note-stack { align-items: center; }
+    .hotel-card .body {
+      align-items: center;
+      text-align: center;
+    }
+    .hotel-card .feats { align-items: center; }
+    .hotel-card .feats span { justify-content: center; }
+    .hotel-card .hotel-actions { justify-content: center; }
+  }
 
   /* Lodging */
   .lodging-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
@@ -1124,7 +1159,7 @@
             <span class="mc">19.5438 N · 96.9102 W</span>
           </div>
         </div>
-        <div class="pin" style="left: 80%; top: 76%">
+        <div class="pin" style="left: 79.5%; top: 66.67%">
           <span class="pulse"></span>
           <span class="dot"></span>
           <span class="name"><span>Finca Santa Rosa</span><span>Teocelo</span></span>
@@ -1203,19 +1238,7 @@
           </li>
           <li>
             <span class="check">-</span>
-            <span><strong>Flights.</strong> International or domestic air travel is not covered.</span>
-          </li>
-          <li>
-            <span class="check">-</span>
             <span><strong>Lodging in Xalapa.</strong> Before or after the retreat - see hotel recommendations below.</span>
-          </li>
-          <li>
-            <span class="check">-</span>
-            <span><strong>Personal travel expenses.</strong> Meals, transit, and incidentals outside the retreat dates.</span>
-          </li>
-          <li>
-            <span class="check">-</span>
-            <span><strong>Personal purchases.</strong> Anything bought outside the included program.</span>
           </li>
         </ul>
       </div>
@@ -1426,13 +1449,13 @@
         <span class="step">Step 02</span>
         <h3>Getting to Xalapa</h3>
         <p>
-          Most attendees take an <strong>ADO bus</strong> from Mexico City to Xalapa. The bus ride is approximately
+          Most attendees take an <a class="inline-link" href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer"><strong>ADO bus</strong></a> from Mexico City to Xalapa. The bus ride is approximately
           4 hours. ADO buses are comfortable, modern, and commonly used for long-distance travel in Mexico.
-          Book tickets via the ADO app or website.
+          Platino and GL lines both have restrooms onboard. Book tickets via the ADO app or website.
         </p>
         <div class="stat-row">
           <div class="stat"><span class="k">Duration</span><span class="v">~4 hrs</span></div>
-          <div class="stat"><span class="k">Booking</span><span class="v">ADO app / web</span></div>
+          <div class="stat"><span class="k">Booking</span><span class="v"><a class="inline-link" href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer">ADO app / web</a></span></div>
         </div>
       </div>
 
@@ -1462,9 +1485,8 @@
     </div>
 
     <div class="hotel-grid reveal">
-      <div class="hotel-card featured">
+      <div class="hotel-card">
         <div class="body">
-          <span class="tag">Recommended</span>
           <span class="name">Holiday Inn Express Xalapa</span>
           <span class="addr">
             Ignacio Zaragoza 8, Zona Centro,<br />
@@ -1485,16 +1507,15 @@
 
       <div class="hotel-card">
         <div class="body">
-          <span class="tag">Additional option</span>
           <span class="name">Hotel Maria Victoria Xalapa</span>
           <span class="addr">
             Ignacio Zaragoza 6, Zona Centro,<br />
             Centro, 91000 Xalapa-Enríquez, Ver., Mexico
           </span>
           <div class="feats">
-            <span>Another central option on Ignacio Zaragoza</span>
-            <span>Easy walk to downtown cafes and Parque Juárez</span>
-            <span>Simple taxi ride to the shuttle meeting point</span>
+            <span>Centrally located in Zona Centro</span>
+            <span>Walking distance to Abracadabra</span>
+            <span>More budget-friendly than Holiday Inn Express</span>
           </div>
           <div class="hotel-actions">
             <a href="https://www.mariavictoriahotel.com/" target="_blank" rel="noreferrer" class="btn sm">
@@ -1619,28 +1640,23 @@
         </div>
         <div class="pack-item" role="checkbox" aria-checked="false" tabindex="0">
           <span class="box"></span>
-          <span class="name">Swimwear and towel</span>
+          <span class="name">Flashlight / headlamp</span>
           <span class="pack-num">06</span>
         </div>
         <div class="pack-item" role="checkbox" aria-checked="false" tabindex="0">
           <span class="box"></span>
-          <span class="name">Flashlight / headlamp</span>
+          <span class="name">Water bottle</span>
           <span class="pack-num">07</span>
         </div>
         <div class="pack-item" role="checkbox" aria-checked="false" tabindex="0">
           <span class="box"></span>
-          <span class="name">Water bottle</span>
+          <span class="name">Personal medications</span>
           <span class="pack-num">08</span>
         </div>
         <div class="pack-item" role="checkbox" aria-checked="false" tabindex="0">
           <span class="box"></span>
-          <span class="name">Personal medications</span>
-          <span class="pack-num">09</span>
-        </div>
-        <div class="pack-item" role="checkbox" aria-checked="false" tabindex="0">
-          <span class="box"></span>
           <span class="name">Cash for incidental expenses</span>
-          <span class="pack-num">10</span>
+          <span class="pack-num">09</span>
         </div>
       </div>
     </div>
@@ -1712,6 +1728,11 @@
       <span class="eyebrow label">11 / FAQ</span>
       <h2>Questions, answered.</h2>
     </div>
+
+    <p class="reveal" style="margin-top: 24px; color: var(--fg-2); font-size: 15px">
+      You can also post additional questions in the
+      <a class="inline-link" href="https://www.facebook.com/events/1665838981293980/" target="_blank" rel="noreferrer">Facebook Event discussion</a>.
+    </p>
 
     <div class="faq-list reveal">
       <div class="faq-item open">
@@ -1830,7 +1851,31 @@
         </button>
         <div class="faq-a">
           <div>
-            <div class="inner">Use the official ADO booking flow and search the route as <strong>México TAPO</strong> to <strong>Xalapa CAXA</strong>. TAPO is the Mexico City terminal, and CAXA is the main ADO terminal in Xalapa. If you see a result that only says <strong>Xalapa</strong> or mixes the names, choose the listing that explicitly ends in <strong>Xalapa CAXA</strong>. In the app, enter origin and destination, pick your date, tap Search, choose your trip and seat, and continue to payment. Open <a class="ado-primary-link" data-ios-href="https://apps.apple.com/mx/app/ado-boletos-de-autob%C3%BAs/id1480058029" data-android-href="https://play.google.com/store/apps/details?id=com.mobilityado.ado&amp;hl=en" data-web-href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" data-ios-label="ADO app for iPhone" data-android-label="ADO app on Google Play" data-web-label="official ADO booking page" href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer">official ADO booking page</a>, or use the <a href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer">México TAPO - Xalapa CAXA route page</a> directly.</div>
+            <div class="inner">Use the official ADO booking flow and search the route as <strong>México TAPO</strong> to <strong>Xalapa CAXA</strong>. TAPO is the Mexico City terminal, and CAXA is the main ADO terminal in Xalapa. If you see a result that only says <strong>Xalapa</strong> or mixes the names, choose the listing that explicitly ends in <strong>Xalapa CAXA</strong>. In the app, enter origin and destination, pick your date, tap Search, choose your trip and seat, and continue to payment. Open the <a class="ado-primary-link inline-link" data-ios-href="https://apps.apple.com/mx/app/ado-boletos-de-autob%C3%BAs/id1480058029" data-android-href="https://play.google.com/store/apps/details?id=com.mobilityado.ado&amp;hl=en" data-web-href="https://www.ado.com.mx/" data-ios-label="ADO app for iPhone" data-android-label="ADO app on Google Play" data-web-label="ADO website" href="https://www.ado.com.mx/" target="_blank" rel="noreferrer">ADO website</a>, or use the <a class="inline-link" href="https://www.ado.com.mx/viajes/ciudad-mexico-tapo-a-terminal-xalapa-caxa" target="_blank" rel="noreferrer">México TAPO - Xalapa CAXA route page</a> directly. If available, <strong>Platino</strong> and <strong>GL</strong> lines both have restrooms onboard.</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" type="button">
+          <span class="idx">11</span>
+          <span class="question">Can I drink the tap water in Mexico?</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <div>
+            <div class="inner">As a general rule, no - visitors should plan on drinking purified or bottled water rather than tap water unless a specific place clearly tells you otherwise.</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" type="button">
+          <span class="idx">12</span>
+          <span class="question">Is there a store near the retreat?</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <div>
+            <div class="inner">No, but trips can be made for emergencies. There is also a store next to Abracadabra where you can pick up additional snacks, medications, and toiletries before we leave for the event.</div>
           </div>
         </div>
       </div>
@@ -1850,7 +1895,6 @@
         <span class="k">Event</span>
         <span class="v">Xalapa Zipline Suspensions 2026</span>
         <span style="color: var(--fg-2); font-size: 14px">Nov 09 - 12, 2026 · Teocelo, Veracruz, MX</span>
-        <span class="soon" style="margin-top: 10px">More information coming soon</span>
       </div>
       <div class="col">
         <span class="k">Hosts</span>
@@ -1874,7 +1918,7 @@
       </div>
       <div class="col">
         <span class="k">Contact</span>
-        <span style="color: var(--fg-2); font-size: 14px">contact@ - placeholder</span>
+        <a href="https://www.facebook.com/events/1665838981293980/" target="_blank" rel="noreferrer">Facebook Event discussion ↗</a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2VFKokL-bGFvwrIYyVXvH18CvGIMEDwYru6f738lPTS2pwQ/viewform" target="_blank" rel="noreferrer" class="btn primary sm" style="margin-top: 12px; align-self: flex-start">
           Register <span class="arrow">↗</span>
         </a>
