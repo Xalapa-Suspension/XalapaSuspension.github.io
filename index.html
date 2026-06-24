@@ -833,6 +833,77 @@
   }
   .bio-card .ig-link:hover { color: var(--accent); }
 
+  .sponsors-wrap {
+    display: grid;
+    gap: 28px;
+  }
+  .sponsors-intro {
+    max-width: 760px;
+    color: var(--fg-2);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  @media (max-width: 980px) {
+    .sponsors-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 540px) {
+    .sponsors-grid { grid-template-columns: 1fr; }
+  }
+  .sponsor-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px;
+    border: 1px solid var(--line-soft);
+    background: var(--bg-2);
+    min-height: 100%;
+  }
+  .sponsor-card.linkable {
+    transition: border-color .2s ease, transform .2s ease, color .2s ease;
+  }
+  .sponsor-card.linkable:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .sponsor-logo {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border: 1px solid var(--line-soft);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+  }
+  .sponsor-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+  .sponsor-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .sponsor-name {
+    font-family: var(--display);
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+  .sponsor-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
   /* FAQ */
   .faq-list { border-top: 1px solid var(--line); }
   .faq-item { border-bottom: 1px solid var(--line); }
@@ -1878,6 +1949,108 @@
             <div class="inner">No, but trips can be made for emergencies. There is also a store next to Abracadabra where you can pick up additional snacks, medications, and toiletries before we leave for the event.</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sponsors">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow label">12 / Sponsors</span>
+      <h2>Supported by artists, suspension collectives, and brands helping make the retreat possible.</h2>
+    </div>
+
+    <div class="sponsors-wrap reveal">
+      <div class="sponsors-grid">
+        <a class="sponsor-card linkable" href="https://www.purklenz.com" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/purklenz.jpg" alt="PurKlenz" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">PurKlenz</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <a class="sponsor-card linkable" href="https://www.instagram.com/kb.donaghy" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/kevin_donaghy.jpg" alt="Kevin Donaghy, Graphic Designer and Printmaker" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Kevin Donaghy, Graphic Designer &amp; Printmaker</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <div class="sponsor-card">
+          <div class="sponsor-logo">
+            <img src="images/old_souls.jpg" alt="Old Souls Network" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Old Souls Network</span>
+          </div>
+        </div>
+
+        <a class="sponsor-card linkable" href="https://www.onhooks.com" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/osc.jpg" alt="Ontario Suspension Collective" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Ontario Suspension Collective</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <a class="sponsor-card linkable" href="https://www.13hooks.org/" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/thirteen_hooks.jpg" alt="Thirteen Hooks Suspension Seminars" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Thirteen Hooks Suspension Seminars</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <a class="sponsor-card linkable" href="https://www.denversuspension.com/" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/dsc.jpg" alt="Denver Suspension Collective" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Denver Suspension Collective</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <a class="sponsor-card linkable" href="https://biometal.net/" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/biometal.jpeg" alt="Biometal" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Biometal</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <a class="sponsor-card linkable" href="https://www.instagram.com/abracadabra.xalapa/" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/abracadabra.png" alt="Abracadabra Tattoo and Piercing" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Abracadabra Tattoo and Piercing</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
+
+        <a class="sponsor-card linkable" href="https://www.instagram.com/_indigenak_suspension_team_/" target="_blank" rel="noreferrer">
+          <div class="sponsor-logo">
+            <img src="images/indigenak.jpeg" alt="Indigenak Suspension Team" />
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">Indigenak Suspension Team</span>
+            <span class="sponsor-link">Visit sponsor ↗</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>
